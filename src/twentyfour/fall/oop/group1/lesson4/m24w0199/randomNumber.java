@@ -8,7 +8,7 @@ package twentyfour.fall.oop.group1.lesson4.m24w0199;
 
 import java.util.Scanner;
 
-public class RandomNumber {
+public class randomNumber {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
