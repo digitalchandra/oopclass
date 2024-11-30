@@ -24,7 +24,7 @@ public class SimpleCalculator {
     }
 
     // for division
-    public static int divide(int num1, int num2) {
+    public static double divide(double num1, double num2) {
         if (num2 == 0) {
             System.out.println("Error: Division by zero");
             return 0;
@@ -54,7 +54,7 @@ public class SimpleCalculator {
                 System.out.println("Enter Second number:");
                 int b = scanner.nextInt();
 
-                int result = switch (choice) {
+                double result = switch (choice) {
                     case 1 -> add(a, b);
                     case 2 -> subtract(a, b);
                     case 3 -> multiply(a, b);
