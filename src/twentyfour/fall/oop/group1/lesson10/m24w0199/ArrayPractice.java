@@ -19,19 +19,19 @@ public class ArrayPractice {
             // Use Collections.sort() to arrange the numbers in ascending order
             Collections.sort(numbers);
 
-            // Print the sorted numbers
+            // sorted numbers in numbers
             System.out.println("Sorted numbers: " + numbers);
 
-            // Find and print the highest and lowest numbers
+            // highest and lowest numbers
             int highest = numbers.get(numbers.size() - 1);
             int lowest = numbers.get(0);
             System.out.println("Highest number: " + highest);
             System.out.println("Lowest number: " + lowest);
 
-            // Remove a specific number (e.g., 15)
-            numbers.remove(Integer.valueOf(15));
+            // Remove a specific number 
+            numbers.remove(Integer.valueOf(10));
 
-            // Print the modified list
+            // Print the modified number lists
             System.out.println("Modified list: " + numbers);
         }
 
