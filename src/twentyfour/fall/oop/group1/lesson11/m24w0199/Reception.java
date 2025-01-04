@@ -57,7 +57,7 @@ public class Reception extends JFrame {
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new Room();
             }
         });
 

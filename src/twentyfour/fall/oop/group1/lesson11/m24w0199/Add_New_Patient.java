@@ -2,182 +2,205 @@ package twentyfour.fall.oop.group1.lesson11.m24w0199;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Date;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.jar.JarEntry;
+import java.util.Date;
 
-public class Add_New_Patient extends JFrame {
+public class Add_New_Patient extends JFrame implements ActionListener {
 
-    // Globle Declear of Fields
-    JComboBox comboBox;
+    JComboBox<String> comboBoxIDType;
+    JTextField textFieldIDNumber, textFieldName, textFieldDisease, textFieldDeposit;
+    JRadioButton rMale, rFemale;
+    Choice roomChoice;
+    JLabel dateLabel;
+    JButton addButton, backButton;
 
-    JTextField textFieldNumber, textName, textFieldDisease, textFieldDeposit;
-    JRadioButton r1, r2;
-    Choice c1;
-    JLabel date;
-    JButton b1, b2;
+    Add_New_Patient() {
+        // Frame setup
+        setTitle("Hospital Management System - Add New Patient");
+        setSize(1020, 700);
+        setLayout(null);
+        setLocation(230, 100);
 
-    Add_New_Patient(){
+        // Main panel
         JPanel panel = new JPanel();
-        panel.setBounds(5,5,1280,720);
-        panel.setBackground(new Color(93,118,205));
+        panel.setBounds(5, 5, 1000, 650);
+        panel.setBackground(new Color(93, 118, 205));
         panel.setLayout(null);
         add(panel);
 
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/bed.png"));
-        Image image = imageIcon.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT);
-        ImageIcon imageIcon1=new ImageIcon(image);
-        JLabel label = new JLabel(imageIcon1);
-        label.setBounds(850,0,200,200);
-        panel.add(label);
+        // Title label
+        JLabel labelTitle = new JLabel("ADD NEW PATIENT DETAILS");
+        labelTitle.setBounds(300, 10, 400, 50);
+        labelTitle.setFont(new Font("Mono", Font.BOLD, 25));
+        labelTitle.setForeground(Color.WHITE);
+        panel.add(labelTitle);
 
-        // Title
-        JLabel lableName = new JLabel("ADD NEW PATIENT DETAILS");
-        lableName.setBounds(15,0,500,75);
-        lableName.setFont(new Font("Mono",Font.BOLD,25));
-        lableName.setForeground(Color.WHITE);
-        panel.add(lableName);
+        // ID Type
+        JLabel idTypeLabel = new JLabel("ID Type:");
+        idTypeLabel.setBounds(50, 100, 100, 30);
+        idTypeLabel.setForeground(Color.WHITE);
+        idTypeLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        panel.add(idTypeLabel);
 
-        // ID Field
-        JLabel lableID = new JLabel("PATIENT ID");
-        lableID.setBounds(15,56,200,30);
-        lableID.setFont(new Font("Mono",Font.PLAIN,17));
-        lableID.setForeground(Color.WHITE);
-        panel.add(lableID);
+        comboBoxIDType = new JComboBox<>(new String[]{"Passport", "National ID", "Driving License"});
+        comboBoxIDType.setBounds(200, 100, 200, 30);
+        panel.add(comboBoxIDType);
 
+        // ID Number
+        JLabel idNumberLabel = new JLabel("ID Number:");
+        idNumberLabel.setBounds(50, 150, 100, 30);
+        idNumberLabel.setForeground(Color.WHITE);
+        idNumberLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        panel.add(idNumberLabel);
 
-        // Dropdown for ID
-        comboBox = new JComboBox(new String[]{"Jayaru Card", "My Number Card", "Driving License"});
-        comboBox.setBounds(271,56,200,30);
-        comboBox.setBackground(new Color(93,118,245));
-        comboBox.setForeground(Color.BLACK);
-        comboBox.setFont(new Font("Mono",Font.PLAIN,17));
-        panel.add(comboBox);
+        textFieldIDNumber = new JTextField();
+        textFieldIDNumber.setBounds(200, 150, 200, 30);
+        panel.add(textFieldIDNumber);
 
-        // ID Field
-        JLabel lableNumber = new JLabel("ID Number ");
-        lableNumber.setBounds(15,100,200,30);
-        lableNumber.setFont(new Font("Mono",Font.PLAIN,17));
-        lableNumber.setForeground(Color.WHITE);
-        panel.add(lableNumber);
+        // Name
+        JLabel nameLabel = new JLabel("Name:");
+        nameLabel.setBounds(50, 200, 100, 30);
+        nameLabel.setForeground(Color.WHITE);
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        panel.add(nameLabel);
 
-        // Add ID Field
-        textFieldNumber = new JTextField();
-        textFieldNumber.setBounds(271,100,200,30);
-        panel.add(textFieldNumber);
+        textFieldName = new JTextField();
+        textFieldName.setBounds(200, 200, 200, 30);
+        panel.add(textFieldName);
 
-        // Patient Name Field
-        JLabel lableName1 = new JLabel("Patient Name  ");
-        lableName1.setBounds(15,150,200,30);
-        lableName1.setFont(new Font("Mono",Font.PLAIN,17));
-        lableName1.setForeground(Color.WHITE);
-        panel.add(lableName1);
+        // Gender
+        JLabel genderLabel = new JLabel("Gender:");
+        genderLabel.setBounds(50, 250, 100, 30);
+        genderLabel.setForeground(Color.WHITE);
+        genderLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        panel.add(genderLabel);
 
-        // Add Name
-        textName = new JTextField();
-        textName.setBounds(271,150,200,30);
-        panel.add(textName);
+        rMale = new JRadioButton("Male");
+        rMale.setBounds(200, 250, 80, 30);
+        rMale.setBackground(new Color(93, 118, 205));
+        rMale.setForeground(Color.WHITE);
+        panel.add(rMale);
 
-        // Patient Gender
-        JLabel lableGender = new JLabel("Patient Gender  ");
-        lableGender.setBounds(15,200,200,30);
-        lableGender.setFont(new Font("Mono",Font.PLAIN,17));
-        lableGender.setForeground(Color.WHITE);
-        panel.add(lableGender);
-
-        // Gender Radio Button
-        r1= new JRadioButton("Male");
-        r1.setFont(new Font("Mono",Font.PLAIN,15));
-        r1.setForeground(Color.WHITE);
-        r1.setBackground(new Color(190,164,170));
-        r1.setBounds(271, 200, 200, 40);
-        panel.add(r1);
-
-
-        r2= new JRadioButton("Female");
-        r2.setFont(new Font("Mono",Font.PLAIN,15));
-        r2.setForeground(Color.WHITE);
-        r2.setBackground(new Color(190,164,170));
-        r2.setBounds(400, 200, 200, 40);
-        panel.add(r2);
+        rFemale = new JRadioButton("Female");
+        rFemale.setBounds(300, 250, 80, 30);
+        rFemale.setBackground(new Color(93, 118, 205));
+        rFemale.setForeground(Color.WHITE);
+        panel.add(rFemale);
 
         ButtonGroup genderGroup = new ButtonGroup();
-        genderGroup.add(r1);
-        genderGroup.add(r2);
+        genderGroup.add(rMale);
+        genderGroup.add(rFemale);
 
         // Disease
-        JLabel lableDisease = new JLabel("Symptoms");
-        lableDisease.setBounds(15,250,200,30);
-        lableDisease.setFont(new Font("Mono",Font.PLAIN,17));
-        lableDisease.setForeground(Color.WHITE);
-        panel.add(lableDisease);
+        JLabel diseaseLabel = new JLabel("Disease:");
+        diseaseLabel.setBounds(50, 300, 100, 30);
+        diseaseLabel.setForeground(Color.WHITE);
+        diseaseLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        panel.add(diseaseLabel);
 
-        // Add Name
         textFieldDisease = new JTextField();
-        textFieldDisease.setBounds(271,250,200,30);
+        textFieldDisease.setBounds(200, 300, 200, 30);
         panel.add(textFieldDisease);
 
+        // Room Number
+        JLabel roomLabel = new JLabel("Room Number:");
+        roomLabel.setBounds(50, 350, 120, 30);
+        roomLabel.setForeground(Color.WHITE);
+        roomLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        panel.add(roomLabel);
 
-        // Disease
-        JLabel lableRoom = new JLabel("Assign Room");
-        lableRoom.setBounds(15,300,200,30);
-        lableRoom.setFont(new Font("Mono",Font.PLAIN,17));
-        lableRoom.setForeground(Color.WHITE);
-        panel.add(lableRoom);
+        /// Show data form the Database
+        roomChoice = new Choice();
+        try {
+            DataBaseConnection c = new DataBaseConnection();
+            ResultSet rs = c.statement.executeQuery("SELECT room_no FROM Room WHERE Availability = 'Availabil'");
+            while (rs.next()) {
+                roomChoice.add(rs.getString("room_no"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        roomChoice.setBounds(200, 350, 200, 30);
+        panel.add(roomChoice);
 
-        // room show form DB
+        // Deposit
+        JLabel depositLabel = new JLabel("Deposit:");
+        depositLabel.setBounds(50, 400, 100, 30);
+        depositLabel.setForeground(Color.WHITE);
+        depositLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        panel.add(depositLabel);
 
-        // Disease
-        JLabel lableDate = new JLabel("Date and Time");
-        lableDate.setBounds(15,350,200,30);
-        lableDate.setFont(new Font("Mono",Font.PLAIN,17));
-        lableDate.setForeground(Color.WHITE);
-        panel.add(lableDate);
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date currentDate = new Date(); // Create a new Date object with the current date and time
-        String formattedDate = formatter.format(currentDate); // Format the date
-        date = new JLabel(formattedDate); // Use the formatted date in the JLabel
-        date.setBounds(271, 350, 200, 30);
-        date.setForeground(Color.WHITE);
-        date.setFont(new Font("Mono", Font.PLAIN, 17));
-        panel.add(date);
-
-
-        // Disease
-        JLabel lableDiposit = new JLabel("Deposit Amount");
-        lableDiposit.setBounds(15,400,200,30);
-        lableDiposit.setFont(new Font("Mono",Font.PLAIN,17));
-        lableDiposit.setForeground(Color.WHITE);
-        panel.add(lableDiposit);
-
-        // Add Name
         textFieldDeposit = new JTextField();
-        textFieldDeposit.setBounds(271,400,200,30);
+        textFieldDeposit.setBounds(200, 400, 200, 30);
         panel.add(textFieldDeposit);
 
-        b1= new JButton("Add Patient");
-        b1.setBounds(160,450,120,50);
-        b1.setForeground(Color.BLACK);
-        b1.setBackground(Color.white);
-        panel.add(b1);
+        // Date and Time
+        JLabel dateLabelStatic = new JLabel("Date and Time:");
+        dateLabelStatic.setBounds(50, 450, 120, 30);
+        dateLabelStatic.setForeground(Color.WHITE);
+        dateLabelStatic.setFont(new Font("Arial", Font.BOLD, 14));
+        panel.add(dateLabelStatic);
 
-        b2= new JButton("Back");
-        b2.setBounds(400,450,120,50);
-        b2.setForeground(Color.BLACK);
-        b2.setBackground(Color.WHITE);
-        panel.add(b2);
+        dateLabel = new JLabel(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        dateLabel.setBounds(200, 450, 200, 30);
+        dateLabel.setForeground(Color.WHITE);
+        panel.add(dateLabel);
 
-
-
-
+        // Buttons
+        addButton = new JButton("Add Patient");
+        addButton.setBounds(150, 500, 120, 40);
+        addButton.addActionListener(this);
+        panel.add(addButton);
 
         setUndecorated(true);
-        setSize(1020,700);
-        setLayout(null);
-        setLocation(230,100);
+        backButton = new JButton("Back");
+        backButton.setBounds(300, 500, 120, 40);
+        backButton.addActionListener(this);
+        panel.add(backButton);
+
         setVisible(true);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == addButton) {
+            String gender = rMale.isSelected() ? "Male" : "Female";
+            String idType = (String) comboBoxIDType.getSelectedItem();
+            String idNumber = textFieldIDNumber.getText();
+            String name = textFieldName.getText();
+            String disease = textFieldDisease.getText();
+            String roomNo = roomChoice.getSelectedItem();
+            String deposit = textFieldDeposit.getText();
+            String currentDate = dateLabel.getText();
+
+            if (idNumber.isEmpty() || name.isEmpty() || disease.isEmpty() || deposit.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill all fields!");
+                return;
+            }
+
+            try {
+                DataBaseConnection c = new DataBaseConnection();
+                String query = "INSERT INTO patient_info (ID, Number, Name, Gender, Patient_Disease, Room_Number, Time, Deposit) VALUES ('"
+                        + idType + "', '" + idNumber + "', '" + name + "', '" + gender + "', '"
+                        + disease + "', '" + roomNo + "', '" + currentDate + "', '" + deposit + "')";
+                String updateRoom = "UPDATE Room SET Availability = 'Occupied' WHERE room_no = '" + roomNo + "'";
+
+                c.statement.executeUpdate(query);
+                c.statement.executeUpdate(updateRoom);
+
+                JOptionPane.showMessageDialog(null, "Patient added successfully.");
+                setVisible(false);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else if (e.getSource() == backButton) {
+            setVisible(false);
+        }
+    }
+
     public static void main(String[] args) {
         new Add_New_Patient();
     }
