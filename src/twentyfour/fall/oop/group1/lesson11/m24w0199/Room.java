@@ -74,6 +74,7 @@ public class Room extends JFrame {
 
 
         // Make the frame visible
+        setUndecorated(true);
         setVisible(true);
 
     }

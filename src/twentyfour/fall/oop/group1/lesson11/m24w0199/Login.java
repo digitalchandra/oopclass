@@ -1,6 +1,5 @@
 package twentyfour.fall.oop.group1.lesson11.m24w0199;
 
-import com.mysql.cj.protocol.Resultset;
 import java.sql.ResultSet;
 
 import javax.swing.*;

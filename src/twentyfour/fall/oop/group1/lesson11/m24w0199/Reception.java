@@ -1,7 +1,6 @@
 package twentyfour.fall.oop.group1.lesson11.m24w0199;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,7 +67,7 @@ public class Reception extends JFrame {
         btn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new Department();
             }
         });
 
@@ -79,7 +78,7 @@ public class Reception extends JFrame {
         btn4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new Employee_info();
             }
         });
 
@@ -90,7 +89,7 @@ public class Reception extends JFrame {
         btn5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new All_patient_info();
             }
         });
 
