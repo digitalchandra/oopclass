@@ -108,6 +108,11 @@ public class Discharge_patient extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 DataBaseConnection c = new DataBaseConnection();
                 try{
+                    c.statement.executeUpdate("delete from patient_info where Number='"+choice.getSelectedItem()+"'");
+                    c.statement.executeUpdate("update Room set Availability ='Availabil' where room_no ='"+Room_Number.getText()+"'");
+                    JOptionPane.showMessageDialog(null,"Patient Details Update Successfully !!");
+                    setVisible(false);
+
 
                 }catch (Exception E){
                     E.printStackTrace();
