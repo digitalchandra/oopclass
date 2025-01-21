@@ -111,31 +111,31 @@ public class Reception extends JFrame {
         btn7.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new Update_patient_details();
             }
         });
 
-        JButton btn8 = new JButton("Ambulance Status");
-        btn8.setBounds(510,58,200,40);
-        btn8.setBackground(new Color(75,55,135));
-        panel1.add(btn8);
-        btn8.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        JButton btn9 = new JButton("Find The Room");
-        btn9.setBounds(510,100,200,40);
-        btn9.setBackground(new Color(75,55,135));
-        panel1.add(btn9);
-        btn9.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+//        JButton btn8 = new JButton("Ambulance Status");
+//        btn8.setBounds(510,58,200,40);
+//        btn8.setBackground(new Color(75,55,135));
+//        panel1.add(btn8);
+//        btn8.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        });
+//
+//        JButton btn9 = new JButton("Find The Room");
+//        btn9.setBounds(510,100,200,40);
+//        btn9.setBackground(new Color(75,55,135));
+//        panel1.add(btn9);
+//        btn9.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        });
 
         JButton btn10 = new JButton("Log Out");
         btn10.setBounds(15,600,200,40);
@@ -144,7 +144,7 @@ public class Reception extends JFrame {
         btn10.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                setVisible(false);
             }
         });
 
